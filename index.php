@@ -39,9 +39,6 @@
 	# date formatting (php.net/manual/en/function.date.php#refsect1-function.date-parameters)
 	$datetime_format = "M. d, Y — h:i A";
 
-	# backup to git?
-	$push_posts_upstream = false;
-
 	# layout
 	$background_color = '#14232f';
 	$text_color = '#fff';
@@ -100,7 +97,6 @@
 	date_default_timezone_set($timezone);
 
 	shell_exec("touch messages.txt");
-	shell_exec("git add messages.txt");
 
 	$authed = false;
 
@@ -141,7 +137,7 @@
 			<nav>
 				<a href='$feed_url'>RSS</a>
 				<a href='index.php'>Post</a>
-				<a href='https://collinshq.com'>get a Collins</a>
+				<a href='https://github.com/charliepark/collins/'>get a Collins</a>
 			</nav>
 		</header>
 		<main>
@@ -215,12 +211,6 @@
 		$rss = $rss_header.$rss_messages.$rss_footer;
 		file_put_contents('rss.xml', $rss);
 
-		shell_exec("git commit -am 'latest post'");
-
-		if (PUSH_POSTS_UPSTREAM) {
-			shell_exec("git push -u origin collins");
-		}
-
 		// web interface → take them to the blog
 		if ($_POST['go_to_blog'] === 'true') {
 			header("Location: " . str_replace('/index.php', '', URL));
@@ -292,7 +282,7 @@
 
 				<article>
 					<h2>Wait; what is this?</h2>
-					<p>This, friend, is a Collins. It’s a simple microblog you can set up on your own server in 30 seconds. You can <a href='splash'>find out more here</a>.</p>
+					<p>This, friend, is a Collins. It’s a simple microblog you can set up on your own server in 30 seconds. You can <a href='https://github.com/charliepark/collins/'>find out more here</a>.</p>
 				</article>
 
 				<article>
