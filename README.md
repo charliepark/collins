@@ -18,7 +18,7 @@ You, your microblogging software, and *God knows what on this side*.
 
 That’s the premise of Collins.
 
-Collins is a simple microblogging tool. Load it onto your own server and have it running in 30 seconds. Then post at will. It looks like [this](https://collins.charliepark.org/collins)
+Collins is a simple microblogging tool. Load it onto your own server and have it running in 30 seconds. Then post at will. It looks like [this](https://collins.charliepark.org/collins).
 
 ## Requirements
 
