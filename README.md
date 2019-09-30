@@ -20,6 +20,14 @@ That’s the premise of Collins.
 
 Collins is a simple microblogging tool. Load it onto your own server and have it running in 30 seconds. Then post at will. 
 
+## Requirements
+
+You'll need three things to use Collins:
+
+1. A normal run-of-the-mill server that can handle PHP. The basic shared server at DreamHost or any other hosting provider will do.
+2. A domain that people can visit.
+3. Comfort using SSH and a Terminal-based editor (vi, vim, nano, etc) to edit files on your server.
+
 ## Getting Started
 
 The beauty of Collins is that it starts out as a single file. It creates a few more files that live in the same project directory, but it stays simple. The core of it is really only about 300 lines of PHP (and HTML/CSS). The code is pretty readable.
@@ -45,3 +53,5 @@ You'll see a box where you can write posts. You'll also be able to enter your pa
 
 * yourdomain.com/collins will be where your posts live (technically, yourdomain.com/collins/index.html)
 * yourdomain.com/collins/index.php will be where you can post new messages. There are also some FAQs on that page, so you don't have to come back here to remember how to post.
+
+That's it! If you use Collins, let me know! I'd love to check yours out!
