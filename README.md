@@ -22,7 +22,7 @@ Collins is a simple microblogging tool. Load it onto your own server and have it
 
 ## Requirements
 
-You'll need three things to use Collins:
+You'll need three things to use Collins. All are normal server-y things. If you have a server you put projects on, you're all set. Just for clarity, though, here's what you need:
 
 1. A normal run-of-the-mill server that can handle PHP. The basic shared server at DreamHost or any other hosting provider will do.
 2. A domain that people can visit.
