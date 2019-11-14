@@ -27,17 +27,17 @@
 	###########################################
 
 	# security! this one is important!
-	$password = "";
+	$password = '';
 
 	# personalization
-	$microblog_title = "My Collins";
-	$microblog_description = "Just another microblog"; # currently only in RSS feed
+	$microblog_title = 'My Collins';
+	$microblog_description = 'Just another microblog'; # currently only in RSS feed
 
 	# timestamps (more options here: php.net/manual/en/timezones.php)
-	$timezone = "America/Los_Angeles";
+	$timezone = 'America/Los_Angeles';
 
 	# date formatting (php.net/manual/en/function.date.php#refsect1-function.date-parameters)
-	$datetime_format = "M. d, Y — h:i A";
+	$datetime_format = 'M. d, Y — h:i A';
 
 	# layout
 	$background_color = '#14232f';
@@ -61,9 +61,9 @@
 				transition: .3s;
 			}
 			a:hover { opacity: 1 }
-			article a:hover { border-color: $contrast_color; }
-			time a { font-size: .65rem; }
-			article { padding: 1rem 0; }
+			article a:hover { border-color: $contrast_color }
+			time a { font-size: .65rem }
+			article { padding: 1rem 0 }
 			h1 { font-weight: 500; letter-spacing: .02em; text-align: center; }
 			html {
 				background: $background_color;
@@ -74,7 +74,7 @@
 				max-width: $text_column_width;
 				padding: 20px;
 			}
-			img { max-width: 100%; }
+			img { max-width: 100% }
 			nav {
 				border: 1px solid $contrast_color;
 				border-width: 1px 0;
@@ -83,20 +83,21 @@
 				justify-content: space-between;
 				padding: 3px 0 2px;
 			}
-			p { line-height: 1.4; margin-bottom: 0; }
-			time { display: block; text-align: right; }
+			strong { font-weight: 600 }
+			p { line-height: 1.4; margin-bottom: 0 }
+			time { display: block; text-align: right }
 			body nav a:nth-child(2) { display: none }
 			body.authed nav a:nth-child(2) { display: initial }
 			body.authed nav a:nth-child(3) { display: none }
 			";
 	
-	define("URL", (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://".$_SERVER[HTTP_HOST].str_replace('index.php', '', $_SERVER[REQUEST_URI]));
-	$feed_url = URL."rss.xml";
+	define('URL', 'http'.(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 's' : '').'://'.$_SERVER[HTTP_HOST].str_replace('index.php', '', $_SERVER[REQUEST_URI]));
+	$feed_url = URL.'rss.xml';
 
-	define("DATETIME_FORMAT", $datetime_format);
+	define('DATETIME_FORMAT', $datetime_format);
 	date_default_timezone_set($timezone);
 
-	shell_exec("touch messages.txt");
+	shell_exec('touch messages.txt');
 
 	$authed = false;
 
@@ -110,7 +111,7 @@
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST' && $authed) {
 
-		setcookie("password", $password, time()+60*60*24*365);
+		setcookie('password', $password, time()+60*60*24*365);
 
 		$Parsedown = new Parsedown();
 		$Parsedown->setSafeMode(true);
@@ -213,28 +214,28 @@
 
 		// web interface → take them to the blog
 		if ($_POST['go_to_blog'] === 'true') {
-			header("Location: " . str_replace('/index.php', '', URL));
+			header('Location: '.str_replace('/index.php', '', URL));
 			die();
 		}
 
 		// but if it comes in via curl/Slack, we'll want to just post the confirmation message.
-		echo "Just posted your latest: ".$_POST['text']."\n";
+		echo 'Just posted your latest: '.$_POST['text'].'\n';
 
 	} else {
 		# at this point, probably a GET request
 
 		if (strlen($password) === 0) {
-			echo "You need to ssh in to index.php and set up a password";
+			echo 'You need to ssh in to index.php and set up a password';
 			die();
 		}
 
 		if ($authed)
 		{
-			$password_input = "";
-			$button_padding = "padding:.25rem;";
+			$password_input = '';
+			$button_padding = '.25';
 		} else {
 			$password_input = "<input name='password' placeholder='password' type='password' />";
-			$button_padding = "padding:1rem;";
+			$button_padding = '1';
 		}
 
 		echo "
@@ -248,30 +249,31 @@
 			a{color:#ffac00;text-decoration:none}
 			abbr{font-size: 0.85em;letter-spacing: 0.02em;}
 			article{margin: 0 auto;}
-			button{background: #ffac00;border: 1px solid #aeacad;border-radius: .5em;color:#fff;font-family: 'Avenir Next',Avenir,'Helvetica Neue',sans-serif;font-size:20px;font-size:1rem;margin:0 0 0 1rem;".$button_padding."width:100px;}
+			button{background: ".$contrast_color.";border: 1px solid ".$text_color.";border-radius: .5em;color:#fff;font-family: 'Avenir Next',Avenir,'Helvetica Neue',sans-serif;font-size:20px;font-size:1rem;margin:0 0 0 1rem;padding:".$button_padding."rem;width:100px;}
 			code{font-family:monaco,monospace;font-size: .82em;}
 			code.block{background:#444;border-radius:.5rem;color:#aeacad;display:block;padding:.5rem 1rem;}
 			form{display:flex;flex-direction:column;font-size:0;padding-top:1rem;text-align:right}
 			h1{font-weight:600;line-height:1;margin:0;padding:80px 0 0;text-align:center}
-			h2{border-bottom: 1px solid #ccc;font-size:1rem;margin: 0;padding: 2rem 1rem 0;}
+			h2{border-bottom: 1px solid #ccc;font-size:1rem;font-weight:600;margin: 0;padding: 2rem 1rem 0;}
 			hr{border:0;border-bottom:1px solid #aeacad;height:0;margin:40px 0 }
-			html{background:#fff;color:#14232f;font-family: 'Avenir Next',Avenir,'Helvetica Neue',sans-serif;font-size:20px;letter-spacing:0.02em;line-height:1.4;margin: 0 auto;max-width:600px}
-			input, textarea{border: 1px solid #aeacad;border-radius: .5em;font-family: 'Avenir Next',Avenir,'Helvetica Neue',sans-serif;font-size:20px;padding:1em;}
+			html{background:".$background_color.";color:".$text_color.";font-family:".$font_family.";font-size:".$font_size.";letter-spacing:0.02em;line-height:1.4;margin: 0 auto;max-width:600px}
+			input, textarea{border: 1px solid #aeacad;border-radius: .5em;font-family:".$font_family.";font-size:".$font_size.";opacity:0.75;padding:1em;}
 			input[name='password']{font-size:1rem;}
 			main{margin:0 auto;padding:0 20px}
 			p{margin: 1rem;}
 			section{padding-bottom: 6rem}
+			strong { font-weight: 600 }
 			textarea{display: block;margin-bottom: 1rem;}
 		</style>
 	</head>
 	<body>
 		<main>
 			<section>
-				<h1>Post to your Collins</h1>
+				<h1>Post to <a href='".URL."'>your Collins</a></h1>
 				<form action='' method='POST'>
 					<textarea name='text' placeholder='your latest' autofocus></textarea>
 					<div>
-						".$password_input."
+						$password_input
 						<input type='hidden' name='go_to_blog' value='true' />
 						<button>post</button>
 					</div>
